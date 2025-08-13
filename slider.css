@@ -1,0 +1,62 @@
+/* スライダー全体の外枠コンテナ */
+.slider1 {
+  display: flex; /* ulを横並びに表示する */
+  margin: 0 calc(50% - 50vw); /* ビューポート幅に合わせて中央配置、全幅表示 */
+  width: 300vw; /* ビュー幅の3倍。スライダーの全体横幅を確保 */
+  height: 800px; /* スライダーの高さを固定 */
+  overflow: hidden; /* はみ出た部分を非表示にする（スライド部分を隠す） */
+}
+
+/* 各ul（スライドのグループ）設定 */
+.slider1 ul {
+  display: flex; /* liを横並びに */
+  padding: 0; /* デフォルトのパディングを削除 */
+  margin: 0; /* デフォルトのマージンを削除 */
+}
+
+/* 各スライド要素（画像やコンテンツ）設定 */
+.slider1 li {
+  width: 600px; /* 各liの幅を600pxに固定 */
+  list-style: none; /* リストのマーカー（●など）を非表示にする */
+}
+
+/* 最初のulに対するアニメーション設定（少し遅れて開始） */
+.slider1 ul:first-child {
+  animation: slide1 150s -75s linear infinite; /* 150秒でループ、開始を-75秒にずらして滑らかループ */
+}
+
+/* 2番目のulに対するアニメーション設定 */
+.slider1 ul:last-child {
+  animation: slide2 150s linear infinite; /* 最初から150秒のアニメーションを無限ループ */
+}
+
+/* 最初のul用のスライドアニメーション（右→左へスライド） */
+@keyframes slide1 {
+  0% {
+    transform: translateX(100%); /* 右端からスタート */
+  }
+  to {
+    transform: translateX(-100%); /* 左端へスライド終了 */
+  }
+}
+
+/* 2番目のul用のスライドアニメーション（左→さらに左へスライド） */
+@keyframes slide2 {
+  0% {
+    transform: translateX(0); /* 現在位置からスタート */
+  }
+  to {
+    transform: translateX(-200%); /* 全体の2倍分左へスライド（1枚目が外れて2枚目が入る想定） */
+  }
+}
+
+/* slide1 と slide2 をずらして動かすことで、切れ目のないスライドに見せています。
+translateX(-200%) にするためには、ul内の内容が**2セット分（例：A, B, C, A, B, C）**入っていることが前提です。
+width: 300vw; は、2つのul（各150vw程度）が横に並ぶことを想定しているためです。
+
+参照リンク：https://em-wc.com/2021/06/24/ずっと右から左へ流れ続ける画像ギャラリーアニ/
+
+Chatgptリンク：https://chatgpt.com/share/68881be4-d228-800d-808d-fadb2b4ef63c
+
+ */
+  }
